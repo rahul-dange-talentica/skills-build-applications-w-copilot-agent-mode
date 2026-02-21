@@ -13,10 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from .views import UserViewSet, TeamViewSet, ActivityViewSet, LeaderboardViewSet, WorkoutViewSet, api_root
+
+# Get codespace name from environment variable
+codespace_name = os.environ.get('CODESPACE_NAME', 'localhost')
+
+# Example endpoint format:
+# https://$CODESPACE_NAME-8000.app.github.dev/api/[component]/
+
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
